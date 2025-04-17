@@ -1,0 +1,90 @@
+### 🛠️ **Step-by-Step Plan**
+
+#### **1. Set Up Your Environment**
+- Install necessary libraries:
+  ```bash
+  pip install fastapi uvicorn requests beautifulsoup4 selenium scrapy openai langchain
+  ```
+- Set up a GitHub repo to store your project.
+
+---
+
+#### **2. Build FastAPI Skeleton**
+- Create a FastAPI project with a single endpoint: `POST /find-jobs`
+- Accept a JSON request like:
+  ```json
+  {
+    "position": "...",
+    "experience": "...",
+    "salary": "...",
+    "jobNature": "...",
+    "location": "...",
+    "skills": "..."
+  }
+  ```
+
+---
+
+#### **3. Implement Job Scrapers/Fetchers**
+- **Mandatory**:
+  - [ ] LinkedIn (via scraping or unofficial APIs)
+  - [ ] Indeed (same as above)
+- **Optional** (Pick one or more):
+  - [ ] Google Jobs
+  - [ ] Glassdoor
+  - [ ] Rozee.pk
+- Use **Requests** or **Selenium/BeautifulSoup** if no API is available.
+- Normalize results to a common format.
+
+---
+
+#### **4. Relevance Filtering with LLM**
+- Use OpenAI / Hugging Face / LangChain to:
+  - Compare job descriptions to input criteria
+  - Score or filter jobs by relevance
+- Optional: Use embeddings (e.g., OpenAI’s `text-embedding-ada-002`) for vector similarity.
+
+---
+
+#### **5. Return Structured Output**
+- Convert filtered jobs to the required output JSON:
+  ```json
+  {
+    "relevant_jobs": [
+      {
+        "job_title": "...",
+        "company": "...",
+        "experience": "...",
+        "jobNature": "...",
+        "location": "...",
+        "salary": "...",
+        "apply_link": "..."
+      }
+    ]
+  }
+  ```
+
+---
+
+#### **6. Test and Document**
+- Test the API with different inputs.
+- Provide:
+  - Sample request/response
+  - Screenshots of working API (use Postman or Swagger UI)
+  - Description of how job matching works
+
+---
+
+#### **7. Deployment (Bonus)**
+- Deploy using:
+  - Render, Railway, or Heroku
+  - Or deploy via Docker and use a public server (e.g., EC2, Vercel with serverless functions)
+
+---
+
+#### **8. Final Deliverables**
+- ✅ GitHub repo with code
+- ✅ Documentation (README.md)
+- ✅ Sample input/output
+- ✅ Deployed API link (if available)
+
