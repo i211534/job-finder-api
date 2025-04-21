@@ -1,6 +1,84 @@
 # job-finder-api
 A job search API based on FastAPI that scrapes listings from sites such as LinkedIn and Indeed. It sifts through jobs for users according to their criteria with AI-driven relevance scoring and returns suitable recommendations.
 
+# Job Search API Documentation
+
+This documentation provides a comprehensive overview of the Job Search API, detailing its available endpoints, data models, and core functionality.
+
+## Overview
+
+The Job Search API enables users to search for job opportunities across multiple platforms, including LinkedIn, Indeed, and Google Jobs. It processes search results based on user-defined criteria and returns relevant job listings in a standardized format.
+
+## API Endpoints
+
+### `POST /find-jobs`
+
+Searches for jobs across multiple platforms based on the provided search criteria.
+
+#### Request Parameters
+
+| Parameter       | Type            | Description                          | Default | Constraints            |
+|-----------------|-----------------|--------------------------------------|---------|------------------------|
+| `request`       | JobSearchRequest | Search criteria object               | -       | Required               |
+| `limit`         | integer         | Maximum number of results to return | 3       | Min: 1, Max: 5         |
+
+## Implementation Details
+
+### Job Sources
+
+The API fetches job listings from the following primary sources:
+
+- **LinkedIn**: Uses the JSearch API with a fallback to web scraping if the API is unavailable or returns no results.
+- **Indeed**: Utilizes the JSearch API.
+- **Google Jobs**: Leverages the Jobs API v14.
+
+### Job Processing Pipeline
+
+1. **Search**: Aggregates job listings from all supported platforms.
+2. **Description Enrichment**: Fetches detailed job descriptions for enhanced relevancy scoring.
+3. **Relevance Scoring**: Scores jobs based on their match to the search criteria.
+4. **Skills Matching**: Matches user-provided skills against job descriptions.
+5. **Sorting**: Prioritizes results based on relevance score.
+6. **Formatting**: Prepares the final output in a standardized format for consistency.
+
+### Rate Limiting
+
+To maintain compliance with third-party API rate limits, the API implements the following strategies:
+- **Exponential Backoff**: Retries failed requests with increasing intervals.
+- **429 Error Handling**: Manages "Too Many Requests" responses gracefully.
+- **Random Jitter**: Adds random delays to avoid request clustering.
+
+### Error Handling
+
+- Returns appropriate HTTP status codes for all scenarios.
+- Logs detailed error information for debugging and monitoring.
+- Implements fallback mechanisms to ensure continuity when primary data sources fail.
+
+## Configuration
+
+The API requires the following environment variables:
+
+- `JSEARCH_API_KEY`: API key for JSearch (LinkedIn and Indeed).
+- `JOBS_API_KEY`: API key for Jobs API (Google Jobs).
+- `HUGGINGFACE_API_KEY`: API key for scoring job relevance.
+
+## Running the API
+
+To run the API locally, use the following command:
+
+```bash
+uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+```
+
+The API will be accessible at: [http://localhost:8000](http://localhost:8000).
+
+## API Documentation
+
+Interactive API documentation is available once the server is running:
+
+- **Swagger UI**: [http://localhost:8000/docs](http://localhost:8000/docs)
+- **ReDoc**: [http://localhost:8000/redoc](http://localhost:8000/redoc)
+
 ## How the Job Matching System Works
 
 Our job search aggregation and matching system uses a multi-layered approach to identify the most relevant job opportunities across multiple platforms. Below is an overview of how it works:
