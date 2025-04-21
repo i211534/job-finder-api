@@ -1,6 +1,62 @@
 # job-finder-api
 A job search API based on FastAPI that scrapes listings from sites such as LinkedIn and Indeed. It sifts through jobs for users according to their criteria with AI-driven relevance scoring and returns suitable recommendations.
 
+## How the Job Matching System Works
+
+Our job search aggregation and matching system uses a multi-layered approach to identify the most relevant job opportunities across multiple platforms. Below is an overview of how it works:
+
+### 1. Data Collection from Multiple Sources
+The system queries multiple job platforms simultaneously to gather a diverse set of opportunities:
+
+- **LinkedIn**: Utilizes LinkedIn's job postings via the JSearch API, with a fallback to direct web scraping if the API does not return results.
+- **Indeed**: Retrieves job listings from Indeed using the JSearch API.
+- **Google Jobs**: Collects job postings from Google's job aggregation service via the Jobs API v14.
+
+For each platform, we implement both API-based collection and fallback scraping mechanisms to ensure reliability and comprehensive coverage.
+
+### 2. Intelligent Job Description Processing
+For high-potential job opportunities, the system:
+
+- Fetches complete job descriptions where available.
+- Extracts key details, such as salary ranges, experience requirements, and job type (remote/onsite).
+- Standardizes data formats across different platforms.
+- Applies rate limiting to comply with API usage policies and prevent IP blocking.
+
+### 3. Advanced Relevance Scoring
+At the core of the system is a relevance scoring engine that:
+
+- Leverages the Hugging Face API with the Flan-T5 model to evaluate job-to-user match quality.
+- Implements a sophisticated prompt-based scoring system that considers:
+  - **Position title relevance**.
+  - **Location matching**.
+  - **Salary range compatibility**.
+  - **Experience level alignment**.
+  - **Job type preference** (remote vs. onsite).
+  - **Skills matching** between user profiles and job requirements.
+
+### 4. Skills-Based Matching
+The system performs detailed skills analysis by:
+
+- Extracting skills from job descriptions using natural language processing (NLP).
+- Matching these skills against user-provided profiles.
+- Applying a weighted scoring boost based on the percentage of matched skills.
+- Assigning additional weight to skills mentioned in the job title.
+
+### 5. Prefiltering and Optimization
+To optimize processing time and maintain quality, the system:
+
+- Prefilters jobs based on key parameters such as position title and location.
+- Conducts comprehensive analysis for a limited number of high-potential jobs.
+- Simplifies scoring for the remaining jobs, focusing primarily on skills matching.
+- Caches results to improve performance for similar searches.
+
+### 6. Results Ranking and Presentation
+Finally, the system:
+
+- Sorts jobs by relevance score in descending order.
+- Formats the results with standardized fields for clean presentation.
+- Returns a curated set of the most relevant opportunities to the user.
+
 ## 📸 API Testing Examples
 
 Example1:
