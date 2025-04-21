@@ -61,6 +61,7 @@ The API requires the following environment variables:
 - `JSEARCH_API_KEY`: API key for JSearch (LinkedIn and Indeed).
 - `JOBS_API_KEY`: API key for Jobs API (Google Jobs).
 - `HUGGINGFACE_API_KEY`: API key for scoring job relevance.
+- I got these API keys from rapidapi.
 
 ## Running the API
 
