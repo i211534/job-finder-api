@@ -20,6 +20,7 @@ Example2:
 # Sample request/response
 
 Requests:
+```json
 {
     "position": "Frontend Developer",
     "experience": "2 years",
@@ -28,8 +29,10 @@ Requests:
     "location": "pakistan",
     "skills": "React"
 }
+```
 
 Response:
+```json
 {
     "relevant_jobs": [
         {
@@ -106,8 +109,10 @@ Response:
         }
     ]
 }
+```
 
 Request:
+```json
 {
     "position": "Backend Developer",
     "experience": "2 years",
@@ -116,8 +121,10 @@ Request:
     "location": "usa",
     "skills": "Python, Django, REST APIs"
 }
+```
 
 Response:
+```json
 {
     "relevant_jobs": [
         {
@@ -194,6 +201,6 @@ Response:
         }
     ]
 }
-
+```
 
 
