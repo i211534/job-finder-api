@@ -58,10 +58,9 @@ To maintain compliance with third-party API rate limits, the API implements the 
 
 The API requires the following environment variables:
 
-- `JSEARCH_API_KEY`: API key for JSearch (LinkedIn and Indeed). (https://rapidapi.com/letscrape-6bRBa3QguO5/api/jsearch/playground/endpoint_73845d59-2a15-4a88-92c5-e9b1bc90956d)
-- `JOBS_API_KEY`: API key for Jobs API (Google Jobs). (https://rapidapi.com/Pat92/api/jobs-api14/playground/apiendpoint_fde5eb50-e288-432f-b29b-5cdcd67af1d3)
+- `JSEARCH_API_KEY`: API key for JSearch (LinkedIn and Indeed). 
+- `JOBS_API_KEY`: API key for Jobs API (Google Jobs). 
 - `HUGGINGFACE_API_KEY`: API key for scoring job relevance.
-- I have provided .env file.
 
 ## Running the API
 
